@@ -6,4 +6,4 @@ Go to \GorillaTag\BepInEx\config and open TrailMonke.cfg To change if its enable
 
 For colors use this site https://www.color-hex.com
 
-![](https://github.com/jona939s/Trail-monkey/blob/main/GTGIF.mp4)
+![grab-landing-page]()
