@@ -8,4 +8,4 @@ For colors use this site https://www.color-hex.com
 
 For download, go to Releases
 
-![grab-release-page](https://github.com/jona939s/Trail-monkey/blob/main/GTTRAILSGIF.gif)
+![grab-release-page](https://github.com/jona939s/Trail-monkey/blob/main/ezgif.com-gif-maker.gif)
