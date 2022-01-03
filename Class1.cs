@@ -14,7 +14,8 @@ using UnityEngine.Rendering;
 
 namespace fly
 {
-    [BepInPlugin("org.J-Joe.monkeytag.Trails", "MonkeyTrails", "1.0.0.0")]
+    [BepInPlugin("org.JJoe.monkeytag.Trails", "MonkeyTrails", "1.0.0.0")]
+    [HarmonyPatch]
     public class MyPatcher : BaseUnityPlugin
     {
         // Body
@@ -40,7 +41,7 @@ namespace fly
 
         public void Awake()
         {
-            var harmony = new Harmony("com.J-Joe.monkeytag.alwaysOn");
+            var harmony = new Harmony("com.JJoe.monkeytag.Trails");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
             ConfigFile config = new ConfigFile(Path.Combine(Paths.ConfigPath, "TrailMonke.cfg"), true);
@@ -69,20 +70,16 @@ namespace fly
             Debug.LogWarning("------- ALL SETTINGS HAS BEEN LOADED NOW -------");
         }
 
-        public void Start()
-        {
-            Debug.LogWarning("------- APPLYING TRAILS IN A FEW SECONDS -------");
-            Invoke("ApplyTrail", 5);
-        }
-
-        public void ApplyTrail()
+        [HarmonyPatch(typeof(GorillaLocomotion.Player))]
+        [HarmonyPatch("Awake", MethodType.Normal)]
+        static void Postfix(GorillaLocomotion.Player __instance)
         {
             Debug.LogWarning("------- APPLYING TRAIL(s) NOW -------");
 
             // Player tag = PlayerOffset
             if (enabled.Value)
             {
-                TrailRenderer tr = GorillaLocomotion.Player.Instance.bodyCollider.gameObject.AddComponent<TrailRenderer>();
+                TrailRenderer tr = __instance.bodyCollider.gameObject.AddComponent<TrailRenderer>();
 
                 tr.enabled = true;
                 tr.emitting = true;
@@ -95,7 +92,7 @@ namespace fly
 
                 if (leftHandTrailEnable.Value)
                 {
-                    TrailRenderer ltr = GorillaLocomotion.Player.Instance.leftHandTransform.gameObject.AddComponent<TrailRenderer>();
+                    TrailRenderer ltr = __instance.leftHandTransform.gameObject.AddComponent<TrailRenderer>();
 
                     ltr.enabled = true;
                     ltr.emitting = true;
@@ -109,7 +106,7 @@ namespace fly
 
                 if (rightHandTrailEnable.Value)
                 {
-                    TrailRenderer rtr = GorillaLocomotion.Player.Instance.rightHandTransform.gameObject.AddComponent<TrailRenderer>();
+                    TrailRenderer rtr = __instance.rightHandTransform.gameObject.AddComponent<TrailRenderer>();
 
                     rtr.enabled = true;
                     rtr.emitting = true;
