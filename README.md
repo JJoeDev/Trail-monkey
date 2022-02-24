@@ -1,6 +1,6 @@
 # Trail-monkey
 
-## I allow everyone to update this mod and submit it to the github as ill be gone from modding for a while
+## I allow everyone to update this mod and submit it to this github as ill be gone from modding for a while
 
 Gives your monkey a trail (client only)
 
